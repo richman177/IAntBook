@@ -29,7 +29,7 @@ class Connection(models.Model):  #Байланыш
 
 
 class BookLike(models.Model):
-    book = models.ForeignKey(Books, on_delete=models.CASCADE)
+    book = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='likes')
     ip_address = models.GenericIPAddressField()
     liked_at = models.DateTimeField(auto_now_add=True)
 
