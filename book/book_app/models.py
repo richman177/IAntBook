@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=64, verbose_name='Категориялар')
+    category_name = models.CharField(max_length=64, verbose_name='Бөлүм')
 
     def __str__(self):
         return self.category_name
@@ -25,3 +25,16 @@ class Connection(models.Model):  #Байланыш
 
     def __str__(self):
         return self.connection
+
+
+
+class BookLike(models.Model):
+    book = models.ForeignKey(Books, on_delete=models.CASCADE)
+    ip_address = models.GenericIPAddressField()
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('book', 'ip_address')
+
+    def __str__(self):
+        return f'{self.ip_address} liked {self.book.book_name}'

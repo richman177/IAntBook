@@ -6,7 +6,7 @@ from .models import Category, Books, Connection
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ['category_name']
 
 
 class BooksSerializers(serializers.ModelSerializer):
