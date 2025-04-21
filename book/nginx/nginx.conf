@@ -1,7 +1,7 @@
 server {
 
     listen 80;
-        server_name {{ SERVER_IP }};
+        server_name _;
 
     location / {
         proxy_pass http://web:8000;
