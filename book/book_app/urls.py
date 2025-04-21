@@ -1,14 +1,14 @@
-from .views import CategoryViewSets, BooksViewSets, ConnectionViewSets, BookLikeAPIView
 from django.urls import path, include
-from rest_framework import routers
+from rest_framework.routers import DefaultRouter
+from .views import CategoryViewSet, BooksViewSet, ConnectionViewSet, BookLikeAPIView, BookDetailAPIView
 
-router = routers.SimpleRouter()
-router.register(r'category', CategoryViewSets, basename='category'),
-router.register(r'books', BooksViewSets, basename='books'),
-router.register(r'connection', ConnectionViewSets, basename='connection'),
+router = DefaultRouter()
+router.register(r'category', CategoryViewSet, basename='category')
+router.register(r'books', BooksViewSet, basename='books')
+router.register(r'connection', ConnectionViewSet, basename='connection')
 
 urlpatterns = [
     path('', include(router.urls)),
     path('books/<int:book_id>/like/', BookLikeAPIView.as_view(), name='book-like'),
-
+    path('books/<int:book_id>/', BookDetailAPIView.as_view(), name='book-detail'),
 ]

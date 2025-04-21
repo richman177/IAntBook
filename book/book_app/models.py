@@ -11,10 +11,12 @@ class Category(models.Model):
 class Books(models.Model):
     book_pdf = models.FileField(upload_to='book_pdf', verbose_name='Китептин PDF фарматы')
     book_name = models.CharField(max_length=64, verbose_name='Китептин аты')
+    book_image = models.ImageField(upload_to='book_images', verbose_name='Китептин суроту')
     book_author = models.CharField(max_length=64, verbose_name='Автору')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Бөлүм')
     publication_year = models.CharField(max_length=32, verbose_name='Басылган жылы')
     loading_time = models.DateTimeField(auto_now=True, verbose_name='Жүктөлгөн убакыт')
+    description = models.TextField()
 
     def __str__(self):
         return self.book_name
