@@ -1,44 +1,40 @@
 from rest_framework import serializers
-from .models import Category, Books, Connection
+from .models import Category, Books, Connection, BookLike
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'category_name']  # id талаасын коштук
+        fields = ['category_name']
 
 
-class BooksSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)  # Категория маалыматы окуу үчүн гана
-    category_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source='category', write_only=True)  # Жазуу үчүн
+class BookLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookLike
+        fields = ['id', 'book', 'unique_field', 'liked_at']
+
+
+class BooksListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Books
+        fields = ['id', 'book_name', 'book_image', 'book_author', 'publication_year']
+
+
+class BooksDetailSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
     loading_time = serializers.DateTimeField(format='%d-%m-%Y', read_only=True)
-    likes_count = serializers.SerializerMethodField()
+    like_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Books
-        fields = [
-            'id', 'book_pdf', 'book_name', 'book_image', 'book_author',
-            'category', 'category_id', 'publication_year', 'loading_time',
-            'description', 'likes_count'
-        ]
+        fields = ['id', 'book_pdf', 'book_name', 'book_image', 'book_author', 'category',
+                  'publication_year', 'loading_time', 'description', 'like_count',]
 
-    def get_likes_count(self, obj):
-        return obj.likes.count()
+    def get_like_count(self, obj):
+        return obj.get_like_count()
 
 
 class ConnectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Connection
-        fields = ['id', 'connection']
-
-
-class BookSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-    likes_count = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Books
-        fields = ['id', 'book_name', 'book_author', 'category', 'likes_count']
-
-    def get_likes_count(self, obj):
-        return obj.likes.count()
+        fields = '__all__'

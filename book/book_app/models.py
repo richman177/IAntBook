@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=64, verbose_name='Бөлүм')
+    category_name = models.CharField(max_length=64, unique=True, verbose_name='Бөлүм')
 
     def __str__(self):
         return self.category_name
@@ -14,9 +14,16 @@ class Books(models.Model):
     book_image = models.ImageField(upload_to='book_images', verbose_name='Китептин суроту')
     book_author = models.CharField(max_length=64, verbose_name='Автору')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Бөлүм')
-    publication_year = models.CharField(max_length=32, verbose_name='Басылган жылы')
+    publication_year = models.IntegerField(verbose_name='Басылган жылы')
     loading_time = models.DateTimeField(auto_now=True, verbose_name='Жүктөлгөн убакыт')
     description = models.TextField()
+
+    def get_like_count(self):
+        # return self.likes.all()
+        book_like = self.likes.all()
+        if book_like.exists():
+            return book_like.count()
+        return 0
 
     def __str__(self):
         return self.book_name
@@ -32,11 +39,12 @@ class Connection(models.Model):  #Байланыш
 
 class BookLike(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='likes')
-    ip_address = models.GenericIPAddressField()
+    like = models.BooleanField(default=False)
     liked_at = models.DateTimeField(auto_now_add=True)
+    unique_field = models.CharField(max_length=50, unique=True)
 
     class Meta:
-        unique_together = ('book', 'ip_address')
+        unique_together = ('unique_field', 'book')
 
     def __str__(self):
-        return f'{self.ip_address} liked {self.book.book_name}'
+        return f'{self.unique_field} liked {self.book.book_name}'
