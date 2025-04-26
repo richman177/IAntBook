@@ -124,10 +124,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://65.1.108.172",
-    "https://65.1.108.172",
-    "http://ec2-65-1-108-172.ap-south-1.compute.amazonaws.com",
-    "https://ec2-65-1-108-172.ap-south-1.compute.amazonaws.com"
+    "http://80.242.57.16",
+    "https://80.242.57.16",
 ]
 
 
