@@ -122,6 +122,15 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://65.1.108.172",
+    "https://65.1.108.172",
+    "http://ec2-65-1-108-172.ap-south-1.compute.amazonaws.com",
+    "https://ec2-65-1-108-172.ap-south-1.compute.amazonaws.com"
+]
+
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
