@@ -122,27 +122,26 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Формаларды жана cookie'лерди ишенимдүү кабыл алуу үчүн
 CSRF_TRUSTED_ORIGINS = [
     "http://80.242.57.16",
     "https://80.242.57.16",
     "http://80.242.57.16:8080",
-    "https://80.242.57.16:8080"
+    "https://80.242.57.16:8080",
 ]
 
-
-CORS_ALLOW_ALL_ORIGINS = True
+# ТАК домендерге гана уруксат беребиз
+CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
     "http://80.242.57.16",
     "https://80.242.57.16",
     "http://80.242.57.16:8080",
     "https://80.242.57.16:8080",
-    # Оставьте также эти, если они вам нужны
-    "https://sub.example.com",
     "http://localhost:3000",
 ]
 
+# Кандай HTTP методдорго уруксат беребиз
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
@@ -152,7 +151,7 @@ CORS_ALLOW_METHODS = [
     "OPTIONS",
 ]
 
-
+# Кандай HTTP Header'лерге уруксат беребиз
 CORS_ALLOW_HEADERS = [
     "content-type",
     "authorization",
