@@ -9,7 +9,7 @@ class Category(models.Model):
 
 
 class Books(models.Model):
-    book_pdf = models.FileField(upload_to='book_pdf', verbose_name='Китептин PDF фарматы', max_length=1024)
+    book_pdf = models.FileField(upload_to='book_pdf', verbose_name='Китептин PDF фарматы')
     book_name = models.CharField(max_length=64, verbose_name='Китептин аты')
     book_image = models.ImageField(upload_to='book_images', null=True, blank=True, verbose_name='Китептин суроту')
     book_author = models.CharField(max_length=64, verbose_name='Автору')
