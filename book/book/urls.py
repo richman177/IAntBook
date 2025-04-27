@@ -27,6 +27,7 @@ schema_view = get_schema_view(
         title="Episyche Technologies",
         default_version='v1',),
     public=True,
+    url = 'http://80.242.57.16:8080',
     permission_classes=(permissions.AllowAny,),
 )
 
