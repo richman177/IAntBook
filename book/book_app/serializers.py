@@ -21,9 +21,10 @@ class BookViewingSerializer(serializers.ModelSerializer):
 
 
 class BooksListSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
     class Meta:
         model = Books
-        fields = ['id', 'book_name', 'book_image', 'book_author', 'publication_year']
+        fields = ['id', 'book_name', 'book_image', 'book_author', 'publication_year', 'category']
 
 
 class BooksDetailSerializer(serializers.ModelSerializer):
