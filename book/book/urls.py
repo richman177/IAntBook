@@ -27,7 +27,7 @@ schema_view = get_schema_view(
         title="Episyche Technologies",
         default_version='v1',),
     public=True,
-    url = 'http://80.242.57.16:8080',
+    url = ' http://127.0.0.1:8000',
     permission_classes=(permissions.AllowAny,),
 )
 
@@ -35,5 +35,5 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('book_app.urls')),
-    path('docs/', schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui'),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,9 @@
-from rest_framework import viewsets, generics
-from .models import Category, Books, Connection, BookLike
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import Category, Books, Connection, BookLike, BookViewing
 from .serializers import (CategorySerializer, BooksDetailSerializer, ConnectionSerializer, BookLikeSerializer,
-                          BooksListSerializer)
+                          BooksListSerializer, BookViewingSerializer)
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -14,7 +16,7 @@ class BooksListAPIView(generics.ListAPIView):
     serializer_class = BooksListSerializer
 
 
-class BooksDetailAPIView(generics.ListAPIView):
+class BooksDetailAPIView(generics.RetrieveAPIView):
     queryset = Books.objects.all()
     serializer_class = BooksDetailSerializer
 
@@ -24,6 +26,30 @@ class ConnectionListAPIView(generics.ListAPIView):
     serializer_class = ConnectionSerializer
 
 
-class BookLikeViewSet(viewsets.ModelViewSet):
+class BookLikeViewSet(generics.CreateAPIView):
     queryset = BookLike.objects.all()
     serializer_class = BookLikeSerializer
+
+
+class BookViewingViewSet(generics.CreateAPIView):
+    queryset = BookViewing.objects.all()
+    serializer_class = BookViewingSerializer
+
+
+
+class TopViewedBooksAPIView(APIView):
+    def get(self, request):
+        all_books = Books.objects.all()
+        books_with_views = [(book, book.get_viewing_count()) for book in all_books]
+        books_with_views.sort(key=lambda x: x[1], reverse=True)
+        top_20_books = books_with_views[:20]
+
+        data = []
+        for book, view_count in top_20_books:
+            data.append({
+                'id': book.id,
+                'name': book.book_name,
+                'author': book.book_author,
+                'view_count': view_count,
+            })
+        return Response(data)
