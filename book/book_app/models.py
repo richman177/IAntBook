@@ -20,7 +20,7 @@ class Books(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Бөлүм')
     publication_year = models.IntegerField(verbose_name='Басылган жылы')
     loading_time = models.DateTimeField(auto_now=True, verbose_name='Жүктөлгөн убакыт')
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
 
     def get_like_count(self):
         return self.likes.count()
