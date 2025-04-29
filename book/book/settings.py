@@ -133,16 +133,18 @@ CSRF_TRUSTED_ORIGINS = [
     "https://80.242.57.16:8080",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True  # Временно разрешаем все origins для разработки
 
 CORS_ALLOWED_ORIGINS = [
     "http://80.242.57.16",
-    "https://80.242.57.16",
+    "https://80.242.57.16", 
     "http://80.242.57.16:8080",
     "https://80.242.57.16:8080",
     "http://localhost:3000",
-    "http://127.0.0.1:8000/"
-]
+    "http://127.0.0.1:8000",  # Убран слеш в конце
+    "http://localhost:8000",
+    "http://localhost:8080"
+] 
 
 CORS_ALLOW_METHODS = [
     "GET",
