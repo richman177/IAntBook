@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Category, Books, Connection, BookLike, BookViewing
 from .serializers import (CategorySerializer, BooksDetailSerializer, ConnectionSerializer, BookLikeSerializer,
-                          BooksListSerializer, BookViewingSerializer)
+                          BooksListSerializer, BookViewingSerializer, BookPDFSerializer)
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -53,3 +53,8 @@ class TopViewedBooksAPIView(APIView):
                 'view_count': view_count,
             })
         return Response(data)
+
+
+class BookPDFListAPIView(generics.ListAPIView):
+    queryset = Books.objects.all()
+    serializer_class = BookPDFSerializer

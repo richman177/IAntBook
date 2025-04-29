@@ -22,6 +22,7 @@ class BookViewingSerializer(serializers.ModelSerializer):
 
 class BooksListSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+
     class Meta:
         model = Books
         fields = ['id', 'book_name', 'book_image', 'book_author', 'publication_year', 'category']
@@ -49,3 +50,9 @@ class ConnectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Connection
         fields = '__all__'
+
+
+class BookPDFSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Books
+        fields = ['id', 'book_pdf']
