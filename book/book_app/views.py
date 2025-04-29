@@ -58,3 +58,8 @@ class TopViewedBooksAPIView(APIView):
 class BookPDFListAPIView(generics.ListAPIView):
     queryset = Books.objects.all()
     serializer_class = BookPDFSerializer
+
+
+class BookPDFDetailAPIView(generics.RetrieveAPIView):
+    queryset = Books.objects.all()
+    serializer_class = BookPDFSerializer

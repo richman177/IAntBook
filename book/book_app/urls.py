@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import TopViewedBooksAPIView
 from .views import (CategoryListAPIView, BooksListAPIView, ConnectionListAPIView,
-                    BookLikeViewSet, BooksDetailAPIView, BookViewingViewSet, BookPDFListAPIView)
+                    BookLikeViewSet, BooksDetailAPIView, BookViewingViewSet, BookPDFListAPIView,
+                    BookPDFDetailAPIView)
 
 
 
@@ -14,4 +15,5 @@ urlpatterns = [
     path('viewing/', BookViewingViewSet.as_view(), name='viewing'),
     path('top-books/', TopViewedBooksAPIView.as_view(), name='top_books'),
     path('pdf/', BookPDFListAPIView.as_view(), name='book_pdf'),
+    path('pdf/<int:pk>/', BookPDFDetailAPIView.as_view(), name='book_pdf_detail')
 ]
