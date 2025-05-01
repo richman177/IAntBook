@@ -5,7 +5,7 @@ from .models import Category, Books, Connection, BookLike, BookViewing
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['category_name']
+        fields = ['id', 'category_name']
 
 
 class BookLikeSerializer(serializers.ModelSerializer):
