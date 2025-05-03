@@ -51,6 +51,7 @@ class TopViewedBooksAPIView(APIView):
                 'name': book.book_name,
                 'author': book.book_author,
                 'view_count': view_count,
+                'book_image': book.book_image.url if book.book_image else None,
             })
         return Response(data)
 
