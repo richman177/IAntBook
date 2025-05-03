@@ -3,6 +3,7 @@ from .views import TopViewedBooksAPIView
 from .views import (CategoryListAPIView, BooksListAPIView, ConnectionListAPIView,
                     BookLikeViewSet, BooksDetailAPIView, BookViewingViewSet, BookPDFListAPIView,
                     BookPDFDetailAPIView)
+from .views import BookDownloadAPIView
 
 
 
@@ -14,6 +15,7 @@ urlpatterns = [
     path('like/', BookLikeViewSet.as_view(), name='like'),
     path('viewing/', BookViewingViewSet.as_view(), name='viewing'),
     path('top-books/', TopViewedBooksAPIView.as_view(), name='top_books'),
-    path('pdf/', BookPDFListAPIView.as_view(), name='book_pdf'),
-    path('pdf/<int:pk>/', BookPDFDetailAPIView.as_view(), name='book_pdf_detail')
+    # path('pdf/', BookPDFListAPIView.as_view(), name='book_pdf'),
+    path('pdf/<int:pk>/', BookPDFDetailAPIView.as_view(), name='book_pdf_detail'),
+    path('books/<int:pk>/download/', BookDownloadAPIView.as_view(), name='book-download'),
 ]

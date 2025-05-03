@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import Category, Books, Connection, BookLike, BookViewing
 from .serializers import (CategorySerializer, BooksDetailSerializer, ConnectionSerializer, BookLikeSerializer,
                           BooksListSerializer, BookViewingSerializer, BookPDFSerializer)
+from django.http import FileResponse, Http404
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -64,3 +65,17 @@ class BookPDFListAPIView(generics.ListAPIView):
 class BookPDFDetailAPIView(generics.RetrieveAPIView):
     queryset = Books.objects.all()
     serializer_class = BookPDFSerializer
+
+
+class BookDownloadAPIView(APIView):
+    def get(self, request, pk):
+        try:
+            book = Books.objects.get(pk=pk)
+            file_handle = book.book_pdf.open()
+
+            response = FileResponse(file_handle, content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{book.book_pdf.name.split("/")[-1]}"'
+            return response
+
+        except Books.DoesNotExist:
+            raise Http404("Китеп табылган жок.")
