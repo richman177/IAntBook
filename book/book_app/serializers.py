@@ -50,9 +50,3 @@ class ConnectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Connection
         fields = '__all__'
-
-
-class BookPDFSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Books
-        fields = ['id', 'book_pdf']
