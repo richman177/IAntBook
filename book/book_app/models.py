@@ -53,7 +53,7 @@ class BookLike(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='likes')
     like = models.BooleanField(default=False)
     liked_at = models.DateTimeField(auto_now_add=True)
-    unique_field = models.CharField(max_length=50, unique=True)
+    unique_field = models.CharField(max_length=50)
 
     def __str__(self):
         return f'{self.unique_field} liked {self.book.book_name}'
