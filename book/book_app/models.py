@@ -55,6 +55,9 @@ class BookLike(models.Model):
     liked_at = models.DateTimeField(auto_now_add=True)
     unique_field = models.CharField(max_length=50)
 
+    class Meta:
+        unique_together = ('book', 'unique_field')
+
     def __str__(self):
         return f'{self.unique_field} liked {self.book.book_name}'
 
