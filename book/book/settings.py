@@ -41,9 +41,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -116,8 +116,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
@@ -132,11 +132,14 @@ CSRF_TRUSTED_ORIGINS = [
     "https://80.242.57.16",
     "http://80.242.57.16:8080",
     "https://80.242.57.16:8080",
+    "http://49.13.140.64",
+    "https://49.13.140.64",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # Временно разрешаем все origins для разработки
 
 CORS_ALLOWED_ORIGINS = [
+    "http://49.13.140.64",
     "http://localhost:5173",
     "http://80.242.57.16",
     "https://80.242.57.16", 
